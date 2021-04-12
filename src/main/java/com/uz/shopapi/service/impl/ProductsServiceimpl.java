@@ -191,6 +191,16 @@ public class ProductsServiceimpl implements ProductsService{
         product.setDel_flag(0);
     }
 
+    @Override
+    public Integer editproduct(ProductDto productDto) {
+        Product product = productsRepository.findById(productDto.getId()).get();
+        if (product !=null){
+            BeanUtils.copyProperties(productDto, product);
+            productsRepository.save(product);
+        }
+        return productDto.getId();
+    }
+
 
     public void copyProperties(Product product,ProductDto productDto ){
         if (product.getId() != null){

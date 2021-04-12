@@ -13,4 +13,6 @@ public interface ProductsService {
     Integer addProduct(ProductDto productDto);
     List<ProductDto> getProductList(Integer clientId);
     void del(Integer id);
+
+    Integer editproduct(ProductDto productDto);
 }

@@ -41,11 +41,13 @@ public class Controller {
     @GetMapping(value = "/{clientid}/{type}/products")
     public List<ProductsDto> getProducts(@PathVariable("type") Integer type,@PathVariable("clientid") Integer  clientid){
         List<ProductsDto> list=productsService.getProducts(type,clientid);
-
         return list;
-
     }
 
+    @PutMapping(path = "/editProduct")
+    public ResponseEntity<Integer> editProduct(@RequestBody ProductDto productDto){
+        return ResponseEntity.ok(productsService.editproduct(productDto));
+    }
 
     @PostMapping(value = "addproduct")
     public ResponseEntity<Integer> addProduct(@RequestBody ProductDto productDto){
@@ -68,6 +70,11 @@ public class Controller {
         List<ProductsDto> list=asosSlaveService.listAddProducts(asosid);
         return ResponseEntity.ok(list);
     }
+    @GetMapping(value = "/getAsosSlave/{tovarid}")
+    public ResponseEntity<List<AsosSlaveDto>>getAsosSlave(@PathVariable Integer tovarid){
+        List<AsosSlaveDto> list=asosSlaveService.listGetAsosSlave(tovarid); //listAddProducts(asosid);
+        return ResponseEntity.ok(list);
+    }
     @PostMapping(value = "asoss")
     public ResponseEntity<List<AsosDto>> get(@RequestBody AsosDto asosDto){
         List<AsosDto> list=asosService.get(asosDto);
@@ -78,7 +85,7 @@ public class Controller {
         AsosDto asosDtos=asosService.put(asosDto);
         return ResponseEntity.ok(asosDtos);
     }
-    @GetMapping(value = "clientid={clientid}/dillers")
+    @GetMapping(value = "{clientid}/dillers")
     public ResponseEntity<List<DillerDto>> getDillers(@PathVariable Integer  clientid){
         List<DillerDto> dillerDtos=dillerService.get(clientid);
         return ResponseEntity.ok(dillerDtos);

@@ -25,6 +25,7 @@ public class MainServiceImpl implements MainService {
     @Autowired
     MainSlaveRepository mainSlaveRepository;
 
+
     @Override
     public Integer addMain(String serial) {
         Main main1=mainRepository.selectMain(serial);
@@ -77,8 +78,12 @@ public class MainServiceImpl implements MainService {
 
     @Override
     public Integer addMainSlave(RequestMainSlave requestMainSlave) {
+
+
         Main main = mainRepository.selectMain(requestMainSlave.getSerial());
+
         if (main!=null){
+
             SlaveMain slaveMain= mainSlaveRepository.findSlaveMainBySerial(main.getId(), requestMainSlave.getSlave_id());
             if(slaveMain==null){
                 slaveMain=new SlaveMain();

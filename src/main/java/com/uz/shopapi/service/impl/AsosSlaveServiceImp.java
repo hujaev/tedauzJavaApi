@@ -1,14 +1,16 @@
 package com.uz.shopapi.service.impl;
 
+import com.uz.shopapi.Response.ResponseOdMainSlave;
+import com.uz.shopapi.dto.AsosSlaveDto;
 import com.uz.shopapi.dto.ProductDto;
 import com.uz.shopapi.dto.ProductsDto;
 import com.uz.shopapi.entity.AsosSlave;
+import com.uz.shopapi.entity.Main;
 import com.uz.shopapi.entity.Product;
-import com.uz.shopapi.repository.AsosRepository;
-import com.uz.shopapi.repository.AsosSlaveRepository;
-import com.uz.shopapi.repository.ProductsRepository;
-import com.uz.shopapi.repository.UserRepository;
+import com.uz.shopapi.entity.SlaveMain;
+import com.uz.shopapi.repository.*;
 import com.uz.shopapi.service.AsosSlaveService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -254,6 +256,24 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
             list.add(productsDto);
         }
         return list;
+    }
+
+    @Override
+    public Integer getAsosSlave(Integer delFlag, Integer tovarId, AsosSlaveDto asosSlaveDto) {
+        return null;
+    }
+
+
+    @Override
+    public List<AsosSlaveDto> listGetAsosSlave(Integer tovarId) {
+        List<AsosSlave> listAsosSlave=asosSlaveRepository.findAsosSlavesByTavarId(tovarId);
+        List<AsosSlaveDto> listAsosSlaveDto = new ArrayList<>();
+        for (AsosSlave asosSlave : listAsosSlave) {
+            AsosSlaveDto asosSlaveDto=new AsosSlaveDto();
+            BeanUtils.copyProperties(asosSlave, asosSlaveDto);
+            listAsosSlaveDto.add(asosSlaveDto);
+        }
+        return listAsosSlaveDto;
     }
 
     @Override
