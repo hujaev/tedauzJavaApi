@@ -60,8 +60,8 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
         Integer inCountAll = 0;
         Integer   countAll = 0;
         for (int i = 0; i <list.size() ; i++) {
-            countAll += list.get(i).getKol_ost();
-            inCountAll += list.get(i).getKol_in_ost();
+            countAll += list.get(i).getKolOst();
+            inCountAll += list.get(i).getKolInOst();
         }
 
         if(countAll>productsDto.getCount() && productsDto.getIncount()==0){
@@ -78,7 +78,7 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
         Integer productsInCount=productsDto.getIncount();
 
         Integer Kol = 0;
-        Integer Kol_in = 0;
+        Integer KolIn = 0;
 
         AsosSlave res = new AsosSlave();
         Integer row=productsDto.getCount()*productsDto.getIncnt()+productsDto.getIncount();
@@ -100,8 +100,8 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
 
 
 
-            Integer asosSlaveOst_in = asosSlave.getKol_in_ost();
-            Integer asosSlaveOst = asosSlave.getKol_ost();
+            Integer asosSlaveOst_in = asosSlave.getKolInOst();
+            Integer asosSlaveOst = asosSlave.getKolOst();
 
 
 
@@ -126,13 +126,13 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
                     if(asosSlaveOst >= productsCount){
                         asosSlaveOst -= productsCount;
                         Kol=productsCount;
-                        Kol_in=0;
+                        KolIn=0;
                         productsCount=0;
                     }
                     if (asosSlaveOst < productsCount && productsCount>0){
                         productsCount -= asosSlaveOst;
                         Kol=asosSlaveOst;
-                        Kol_in=0;
+                        KolIn=0;
                         asosSlaveOst=0;
                     }
                 }
@@ -148,7 +148,7 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
                     asosSlaveOst=all / productsDto.getIncnt();
                     asosSlaveOst_in=all % productsDto.getIncnt();
                     Kol   =row / productsDto.getIncnt();
-                    Kol_in=row % productsDto.getIncnt();
+                    KolIn=row % productsDto.getIncnt();
                     row=0;
                 }
                 else{
@@ -158,16 +158,16 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
                     asosSlaveOst_in=0;
 
                     Kol   =all / productsDto.getIncnt();
-                    Kol_in=all % productsDto.getIncnt();
+                    KolIn=all % productsDto.getIncnt();
                 }
             }
 
 
-            asosSlave.setKol_ost(asosSlaveOst);
-            asosSlave.setKol_in_ost(asosSlaveOst_in);
+            asosSlave.setKolOst(asosSlaveOst);
+            asosSlave.setKolInOst(asosSlaveOst_in);
             asosSlaveRepository.save(asosSlave);
 
-            Double   summaIn =(Double)(Kol_in * productsDto.getInprice()*1.0);
+            Double   summaIn =(Double)(KolIn * productsDto.getInprice()*1.0);
             Double     summa =(Double)(Kol * productsDto.getPrice()*1.0);
             Double  summaAll = summa + summaIn;
 
@@ -179,7 +179,7 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
             asosSlaveInsert.setUser_id(userId);
 
             asosSlaveInsert.setKol(Kol);
-            asosSlaveInsert.setKol_in(Kol_in);
+            asosSlaveInsert.setKolIn(KolIn);
 
             asosSlaveInsert.setSumma(summa);
             asosSlaveInsert.setSumma_in(summaIn);
@@ -188,9 +188,9 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
             asosSlaveInsert.setSotish_in((Double)(productsDto.getInprice()*1.0));
             asosSlaveInsert.setSena(asosSlave.getSena());
             asosSlaveInsert.setSena_in(asosSlave.getSena_in());
-            asosSlaveInsert.setKol_ost(asosSlave.getId());
+            asosSlaveInsert.setKolOst(asosSlave.getId());
 
-            asosSlaveInsert.setKol_in_ost(0);
+            asosSlaveInsert.setKolInOst(0);
             asosSlaveInsert.setTuri(0);
             asosSlaveInsert.setSubkod(0);
             asosSlaveInsert.setDel_flag(1);
@@ -245,8 +245,8 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
             else{
                 productsDto.setCount(0);
             }
-            if (asosSlaveList.get(i).getKol_in() != null){
-                productsDto.setIncount(asosSlaveList.get(i).getKol_in());
+            if (asosSlaveList.get(i).getKolIn() != null){
+                productsDto.setIncount(asosSlaveList.get(i).getKolIn());
             }
             else {
                 productsDto.setIncount(1);
@@ -288,7 +288,7 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
                 if (list.get(i).getAsos_id().equals(asosId) && list.get(i).getTovar_id().equals(productsDto.getProductId())){
                     asosSlave=list.get(i);
                     productsDto.setCount(productsDto.getCount()+asosSlave.getKol());
-                    productsDto.setIncount(productsDto.getIncount()+asosSlave.getKol_in());
+                    productsDto.setIncount(productsDto.getIncount()+asosSlave.getKolIn());
                     break;
                 }
             }
@@ -300,11 +300,11 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
         asosSlave.setTovar_nom(productsDto.getName());
         asosSlave.setTovar_id(productsDto.getProductId());
         asosSlave.setDel_flag(delFlag);
-        asosSlave.setKol_ost(productsDto.getCount());
-        asosSlave.setKol_in_ost(productsDto.getIncount());
+        asosSlave.setKolOst(productsDto.getCount());
+        asosSlave.setKolInOst(productsDto.getIncount());
         asosSlave.setAsos_id(asosId);
         asosSlave.setKol(productsDto.getCount());
-        asosSlave.setKol_in(productsDto.getIncount());
+        asosSlave.setKolIn(productsDto.getIncount());
         asosSlave.setSotish(productsDto.getPrice());
         asosSlave.setSotish_in(productsDto.getInprice());
         asosSlave.setUser_id(userId);
@@ -324,12 +324,12 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
         List<AsosSlave> asosSlaveDelList=asosSlaveRepository.findAll();
         for (int i = 0; i < asosSlaveDelList.size(); i++) {
             if(asosSlaveDelList.get(i).getDel_flag().equals(1) && asosSlaveDelList.get(i).getTovar_id().equals(id) && asosSlaveDelList.get(i).getAsos_id().equals(asosId)){
-                AsosSlave asosSlave=asosSlaveRepository.findById(asosSlaveDelList.get(i).getKol_ost()).get();
-                Integer KolOst=asosSlave.getKol_ost()+asosSlaveDelList.get(i).getKol();
-                Integer KolInOst=asosSlave.getKol_in_ost()+asosSlaveDelList.get(i).getKol_in();
+                AsosSlave asosSlave=asosSlaveRepository.findById(asosSlaveDelList.get(i).getKolOst()).get();
+                Integer KolOst=asosSlave.getKolOst()+asosSlaveDelList.get(i).getKol();
+                Integer KolInOst=asosSlave.getKolInOst()+asosSlaveDelList.get(i).getKolIn();
                 Integer incnt=productsRepository.findById(asosSlaveDelList.get(i).getTovar_id()).get().getKol_in();
-                asosSlave.setKol_ost((KolOst*incnt+KolInOst) / incnt);
-                asosSlave.setKol_in_ost((KolOst*incnt+KolInOst) % incnt);
+                asosSlave.setKolOst((KolOst*incnt+KolInOst) / incnt);
+                asosSlave.setKolInOst((KolOst*incnt+KolInOst) % incnt);
                 asosSlaveRepository.save(asosSlave);
                 asosSlaveDelList.get(i).setDel_flag(delFlag);
                 asosSlaveRepository.save(asosSlaveDelList.get(i));
@@ -342,7 +342,7 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
     @Override
     public Boolean putProducts(ProductsDto productsDto) {
         AsosSlave asosSlavePut=asosSlaveRepository.findById(productsDto.getId()).get();
-        AsosSlave asosSlave=asosSlaveRepository.findById(asosSlavePut.getKol_ost()).get();
+        AsosSlave asosSlave=asosSlaveRepository.findById(asosSlavePut.getKolOst()).get();
 
         asosSlaveRepository.save(asosSlavePut);
         return true;

@@ -33,7 +33,12 @@ public class Controller {
     HaridorService haridorService;
     @Autowired
     DillerService dillerService;
-
+    @Autowired
+    KatService katService;
+    @Autowired
+    BrendService BrendService;
+    @Autowired
+    ZavodService ZavodService;
     @Autowired
     MainService mainService;
 
@@ -48,7 +53,21 @@ public class Controller {
     public ResponseEntity<Integer> editProduct(@RequestBody ProductDto productDto){
         return ResponseEntity.ok(productsService.editproduct(productDto));
     }
-
+    @GetMapping(value = "/kat")
+    public ResponseEntity<List<KatDto>> getKat(){
+        List<KatDto> katDtos=katService.get();
+        return ResponseEntity.ok(katDtos);
+    }
+    @GetMapping(value = "/brend")
+    public ResponseEntity<List<BrendDto>> getBrend(){
+        List<BrendDto> brendDtos=BrendService.get();
+        return ResponseEntity.ok(brendDtos);
+    }
+    @GetMapping(value = "/zavod")
+    public ResponseEntity<List<ZavodDto>> getZavod(){
+        List<ZavodDto> zavodDtos=ZavodService.get();
+        return ResponseEntity.ok(zavodDtos);
+    }
     @PostMapping(value = "addproduct")
     public ResponseEntity<Integer> addProduct(@RequestBody ProductDto productDto){
         Integer result=productsService.addProduct(productDto);

@@ -28,13 +28,13 @@ public class AsosSlave implements Serializable {
     @Column
     Integer kol;
     @Column
-    Integer kol_in;
+    Integer kolIn;
 
     @Column
-    Integer kol_ost;
+    Integer kolOst;
 
     @Column
-    Integer kol_in_ost;
+    Integer kolInOst;
 
     @Column
     Double summa;
@@ -205,28 +205,28 @@ public class AsosSlave implements Serializable {
         this.kol = kol;
     }
 
-    public Integer getKol_in() {
-        return kol_in;
+    public Integer getKolIn() {
+        return kolIn;
     }
 
-    public void setKol_in(Integer kol_in) {
-        this.kol_in = kol_in;
+    public void setKolIn(Integer kolIn) {
+        this.kolIn = kolIn;
     }
 
-    public Integer getKol_ost() {
-        return kol_ost;
+    public Integer getKolOst() {
+        return kolOst;
     }
 
-    public void setKol_ost(Integer kol_ost) {
-        this.kol_ost = kol_ost;
+    public void setKolOst(Integer kolOst) {
+        this.kolOst = kolOst;
     }
 
-    public Integer getKol_in_ost() {
-        return kol_in_ost;
+    public Integer getKolInOst() {
+        return kolInOst;
     }
 
-    public void setKol_in_ost(Integer kol_in_ost) {
-        this.kol_in_ost = kol_in_ost;
+    public void setKolInOst(Integer kolInOst) {
+        this.kolInOst = kolInOst;
     }
 
     public Double getSumma() {

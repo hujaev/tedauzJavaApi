@@ -128,7 +128,10 @@ public class ProductsServiceimpl implements ProductsService{
         Product product=new Product();
         BeanUtils.copyProperties(productDto, product);
         product.setDel_flag(1);
-        //product.setKat();
+        if (product.getKat()==null)
+        {
+            product.setKat(0);
+        }
         Integer lastProductId=0;
         lastProductId = productsRepository.save(product).getId();
         AsosSlave asosSlave=new AsosSlave();
@@ -138,10 +141,10 @@ public class ProductsServiceimpl implements ProductsService{
             asosSlave.setAsos_id(asos.getId());
             asosSlave.setUser_id(product.getUser_id());
             asosSlave.setKol(product.getTkol());
-            asosSlave.setKol_in(product.getTkol_in());
+            asosSlave.setKolIn(product.getTkol_in());
             asosSlave.setDel_flag(1);
-            asosSlave.setKol_ost(product.getTkol());
-            asosSlave.setKol_in_ost(product.getTkol_in());
+            asosSlave.setKolOst(product.getTkol());
+            asosSlave.setKolInOst(product.getTkol_in());
             asosSlave.setResept(0);
             asosSlave.setSubkod(0);
             asosSlave.setSumma_all_ost(0.0);
