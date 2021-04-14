@@ -1,11 +1,8 @@
 package com.uz.shopapi.service.impl;
 
 import com.uz.shopapi.dto.DillerDto;
-import com.uz.shopapi.dto.HaridorDto;
 import com.uz.shopapi.entity.Diller;
-import com.uz.shopapi.entity.Haridor;
 import com.uz.shopapi.repository.DillerRepository;
-import com.uz.shopapi.repository.HaridorRepository;
 import com.uz.shopapi.service.DillerService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

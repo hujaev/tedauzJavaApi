@@ -128,7 +128,7 @@ public class ProductsServiceimpl implements ProductsService{
         Product product=new Product();
         BeanUtils.copyProperties(productDto, product);
         product.setDel_flag(1);
-        product.setKat(0);
+        //product.setKat();
         Integer lastProductId=0;
         lastProductId = productsRepository.save(product).getId();
         AsosSlave asosSlave=new AsosSlave();
