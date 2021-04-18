@@ -1,9 +1,5 @@
 package com.uz.shopapi.dto;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 
 public class AsosDto {
 

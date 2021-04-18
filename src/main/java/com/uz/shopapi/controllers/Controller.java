@@ -84,7 +84,7 @@ public class Controller {
         return ResponseEntity.ok(list);
     }
 
-    @GetMapping(value = "/{asosid}/products")
+    @GetMapping(value = "/products/{asosid}")
     public ResponseEntity<List<ProductsDto>> getAddProducts(@PathVariable Integer asosid){
         List<ProductsDto> list=asosSlaveService.listAddProducts(asosid);
         return ResponseEntity.ok(list);
@@ -101,6 +101,7 @@ public class Controller {
     }
     @PostMapping(value = "newasos")
     public ResponseEntity<AsosDto> put(@RequestBody AsosDto asosDto){
+        //asosDto.setXodim_id(99);
         AsosDto asosDtos=asosService.put(asosDto);
         return ResponseEntity.ok(asosDtos);
     }

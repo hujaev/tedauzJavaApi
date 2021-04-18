@@ -2,21 +2,15 @@ package com.uz.shopapi.service.impl;
 
 import com.uz.shopapi.dto.AsosDto;
 import com.uz.shopapi.entity.Asos;
-import com.uz.shopapi.entity.Haridor;
 import com.uz.shopapi.repository.AsosRepository;
 import com.uz.shopapi.repository.HaridorRepository;
 import com.uz.shopapi.service.AsosService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 @Service
 public class AsosServiceImpl implements AsosService {
@@ -251,6 +245,8 @@ public class AsosServiceImpl implements AsosService {
         BeanUtils.copyProperties(asosDto, newasos);
 
         newasos.setUser_id(asosDto.getUserId());
+        newasos.setXodim_id(asosDto.getXodimId());
+
         Asos asos = asosRepository.save(newasos);
 //        asosDto.setId(newasos.getId());
         BeanUtils.copyProperties(asos, asosDto);
