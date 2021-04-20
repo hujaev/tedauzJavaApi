@@ -100,8 +100,8 @@ public class Controller {
         List<AsosDto> list=asosService.get(asosDto);
         return ResponseEntity.ok(list);
     }
-    @PutMapping(path = "/putasos")
-    public ResponseEntity<AsosDto> editAsos(@ResponseBody AsosDto asosDto){
+    @PutMapping(path = "/editasos")
+    public ResponseEntity<AsosDto> editAsos(@RequestBody AsosDto asosDto){
         return ResponseEntity.ok(asosService.editAsos(asosDto));
     }
     @PostMapping(value = "newasos")
@@ -116,7 +116,7 @@ public class Controller {
         return ResponseEntity.ok(dillerDtos);
     }
 
-    @GetMapping(value = "/{clientid}/harodors")
+    @GetMapping(value = "/{clientid}/haridors")
     public ResponseEntity<List<HaridorDto>> getHaridor(@PathVariable Integer  clientid){
        List<HaridorDto> list=haridorService.getHaridor(clientid);
         return ResponseEntity.ok(list);

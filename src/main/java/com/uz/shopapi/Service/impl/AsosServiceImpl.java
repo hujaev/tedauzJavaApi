@@ -276,9 +276,9 @@ public class AsosServiceImpl implements AsosService {
     public AsosDto editAsos(AsosDto asosDto) {
         Asos asos = asosRepository.findById(asosDto.getId()).get();
         if (asos != null){
-            Asos asos1=new Asos();
-            BeanUtils.copyProperties(asosDto, asos1);
-            asosRepository.save(asos1);
+
+            BeanUtils.copyProperties(asosDto, asos);
+            asosRepository.save(asos);
         }
         return asosDto;
     }

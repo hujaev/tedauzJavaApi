@@ -5,10 +5,6 @@ import com.uz.shopapi.Model.entity.User;
 import com.uz.shopapi.repository.UserRepository;
 import com.uz.shopapi.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,8 +16,6 @@ public class UserServiceImp implements UserService {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    public BCryptPasswordEncoder encoder;
 
     @Override
     public List<UserDto> getUsers() {
@@ -77,10 +71,5 @@ public class UserServiceImp implements UserService {
     }
 
 
-    @Override
-    public org.springframework.security.core.userdetails.User loadUserByUsername(String s) {
-        User user = userRepository.getUserByUsername(s);
-        if (user == null) throw new UsernameNotFoundException(s);
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), encoder.encode(user.getUserpass()), new ArrayList<>());
-    }
+
 }
