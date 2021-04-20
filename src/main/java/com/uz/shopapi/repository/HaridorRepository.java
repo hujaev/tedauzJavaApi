@@ -1,12 +1,9 @@
 package com.uz.shopapi.repository;
 
-import com.uz.shopapi.entity.Haridor;
+import com.uz.shopapi.Model.entity.Haridor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import java.util.Optional;
-import java.util.Queue;
 
 public interface HaridorRepository extends JpaRepository<Haridor,Integer> {
 

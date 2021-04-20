@@ -1,11 +1,10 @@
 package com.uz.shopapi.repository;
 
-import com.uz.shopapi.entity.Asos;
+import com.uz.shopapi.Model.entity.Asos;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import javax.persistence.Column;
 import java.util.List;
 
 public interface AsosRepository extends JpaRepository<Asos,Integer> {

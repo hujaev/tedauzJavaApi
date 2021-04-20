@@ -1,16 +1,14 @@
 package com.uz.shopapi.controllers;
 
-import com.uz.shopapi.Request.RequestMainSlave;
-import com.uz.shopapi.Response.ResponseOdMainSlave;
-import com.uz.shopapi.dto.*;
-import com.uz.shopapi.entity.User;
-import com.uz.shopapi.service.*;
+
+import com.uz.shopapi.Model.Request.RequestMainSlave;
+import com.uz.shopapi.Model.dto.*;
+import com.uz.shopapi.Model.Response.ResponseOdMainSlave;
+import com.uz.shopapi.Service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.socket.WebSocketSession;
 
 import java.util.List;
 
@@ -31,14 +29,19 @@ public class Controller {
 
     @Autowired
     HaridorService haridorService;
+
     @Autowired
     DillerService dillerService;
+
     @Autowired
     KatService katService;
+
     @Autowired
     BrendService BrendService;
+
     @Autowired
     ZavodService ZavodService;
+
     @Autowired
     MainService mainService;
 
@@ -48,7 +51,6 @@ public class Controller {
         List<ProductsDto> list=productsService.getProducts(type,clientid);
         return list;
     }
-
     @PutMapping(path = "/editProduct")
     public ResponseEntity<Integer> editProduct(@RequestBody ProductDto productDto){
         return ResponseEntity.ok(productsService.editproduct(productDto));
@@ -83,7 +85,6 @@ public class Controller {
         List<ProductDto> list=productsService.getProductList(clientid);
         return ResponseEntity.ok(list);
     }
-
     @GetMapping(value = "/products/{asosid}")
     public ResponseEntity<List<ProductsDto>> getAddProducts(@PathVariable Integer asosid){
         List<ProductsDto> list=asosSlaveService.listAddProducts(asosid);
@@ -99,58 +100,54 @@ public class Controller {
         List<AsosDto> list=asosService.get(asosDto);
         return ResponseEntity.ok(list);
     }
+    @PutMapping(path = "/putasos")
+    public ResponseEntity<AsosDto> editAsos(@ResponseBody AsosDto asosDto){
+        return ResponseEntity.ok(asosService.editAsos(asosDto));
+    }
     @PostMapping(value = "newasos")
     public ResponseEntity<AsosDto> put(@RequestBody AsosDto asosDto){
         //asosDto.setXodim_id(99);
         AsosDto asosDtos=asosService.put(asosDto);
         return ResponseEntity.ok(asosDtos);
     }
-    @GetMapping(value = "{clientid}/dillers")
+    @GetMapping(value = "/{clientid}/dillers")
     public ResponseEntity<List<DillerDto>> getDillers(@PathVariable Integer  clientid){
         List<DillerDto> dillerDtos=dillerService.get(clientid);
         return ResponseEntity.ok(dillerDtos);
     }
 
-
-    @GetMapping(value = "/clientid={clientid}/harodors")
+    @GetMapping(value = "/{clientid}/harodors")
     public ResponseEntity<List<HaridorDto>> getHaridor(@PathVariable Integer  clientid){
        List<HaridorDto> list=haridorService.getHaridor(clientid);
         return ResponseEntity.ok(list);
     }
-
     @PostMapping(value = "/asos")
     public ResponseEntity<AsosDto> getAsos(@RequestBody AsosDto asosDto){
         AsosDto asos=asosService.getAsos(asosDto);
         return ResponseEntity.ok(asos);
     }
-
     @PostMapping(value = "/asosblock")
     public ResponseEntity<String> blockAsos(@RequestBody AsosDto asosDto){
         asosService.block(asosDto);
         return ResponseEntity.ok("ochirdi");
     }
-
-
-    @PostMapping(value="/asosslave/asosid={asosid}/userid={userid}",produces = "application/json;charset=UTF-8")
+    @PostMapping(value="/asosslave/{asosid}/{userid}",produces = "application/json;charset=UTF-8")
     public ResponseEntity<Integer> asosSlaveSave(@PathVariable Integer asosid, @PathVariable Integer userid,@RequestBody ProductsDto productsDto) {
         Integer result=asosSlaveService.addProducts(1,asosid,userid,productsDto);
         return  ResponseEntity.ok(result);
     }
-    @PostMapping(value="/asosslave2/asosid={asosid}/userid={userid}",produces = "application/json;charset=UTF-8")
+    @PostMapping(value="/asosslave2/{asosid}/{userid}",produces = "application/json;charset=UTF-8")
     public ResponseEntity<Integer> asosSlaveSave2(@PathVariable Integer asosid, @PathVariable Integer userid,@RequestBody ProductsDto productsDto) {
         Integer result=asosSlaveService.addProducts2(1,asosid,userid,productsDto);
         return  ResponseEntity.ok(result);
     }
-
-
-    @PostMapping(value="/asosslaveput/asosid={asosid}/userid={userid}",produces = "application/json;charset=UTF-8")
+    @PostMapping(value="/asosslaveput/{asosid}/{userid}",produces = "application/json;charset=UTF-8")
     public ResponseEntity<Integer> asosSlavePut(@PathVariable Integer asosid, @PathVariable Integer userid,@RequestBody ProductsDto productsDto) {
         asosSlaveService.delProducts(2,asosid,productsDto.getProductId());
         Integer result=asosSlaveService.addProducts(2,asosid,userid,productsDto);
         return  ResponseEntity.ok(result);
     }
-
-    @DeleteMapping(value="/delasosslave/asosid={asosid}/id={id}",produces = "application/json;charset=UTF-8")
+    @DeleteMapping(value="/delasosslave/{asosid}/{id}",produces = "application/json;charset=UTF-8")
     public ResponseEntity<Boolean> asosSlaveDelete(@PathVariable Integer asosid,@PathVariable Integer id) {
         Boolean result=asosSlaveService.delProducts(0,asosid,id);
         return  ResponseEntity.ok(result);
@@ -160,7 +157,6 @@ public class Controller {
         Boolean result=asosSlaveService.putProducts(productsDto);
         return  ResponseEntity.ok(result);
     }
-
     @GetMapping(value = "/users")
     public ResponseEntity<List<UserDto>> getUsers(){
         List<UserDto> list=userService.getUsers();
@@ -171,17 +167,14 @@ public class Controller {
         UserDto userDto=userService.checkUser(user);
         return  ResponseEntity.ok(userDto);
     }
-
     @PostMapping(path = "/addSerial/{serial}")
     public ResponseEntity<Integer> addSerial(@PathVariable String serial){
         return ResponseEntity.ok(mainService.addMain(serial));
     }
-
     @PostMapping(path = "/checkSerialOfMain")
     public ResponseEntity<Integer> checkMainSerial(@RequestParam("serial") String serial,@RequestParam("check") Integer check){
         return ResponseEntity.ok(mainService.checkMainSerial(serial, check));
     }
-
     @GetMapping(path = "/getMainSlave/{slaveid}")
     public ResponseEntity<List<ResponseOdMainSlave>> getMainSlave(@PathVariable int slaveid){
         return ResponseEntity.ok(mainService.getMainSlaves(slaveid));
@@ -190,8 +183,4 @@ public class Controller {
     public ResponseEntity<Integer> addMainSlave(@RequestBody RequestMainSlave requestMainSlave){
         return ResponseEntity.ok(mainService.addMainSlave(requestMainSlave));
     }
-
-
-
-
 }

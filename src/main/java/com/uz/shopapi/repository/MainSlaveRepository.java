@@ -1,6 +1,6 @@
 package com.uz.shopapi.repository;
 
-import com.uz.shopapi.entity.SlaveMain;
+import com.uz.shopapi.Model.entity.SlaveMain;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

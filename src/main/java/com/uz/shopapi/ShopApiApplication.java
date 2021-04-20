@@ -1,15 +1,11 @@
 package com.uz.shopapi;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.time.LocalDate;
 
 import org.springframework.context.annotation.Bean;
-import org.telegram.telegrambots.meta.TelegramBotsApi;
-import org.telegram.telegrambots.ApiContextInitializer;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @SpringBootApplication
@@ -19,6 +15,10 @@ public class ShopApiApplication {
 
             SpringApplication.run(ShopApiApplication.class, args);
 
+    }
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 
 

@@ -1,18 +1,10 @@
 package com.uz.shopapi.repository;
 
-import com.uz.shopapi.dto.ProductsDto;
-import com.uz.shopapi.entity.Product;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.uz.shopapi.Model.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityResult;
-import javax.persistence.FieldResult;
-import javax.persistence.SqlResultSetMapping;
-import java.time.LocalDate;
 import java.util.List;
 
 public interface ProductsRepository extends JpaRepository<Product,Integer> {

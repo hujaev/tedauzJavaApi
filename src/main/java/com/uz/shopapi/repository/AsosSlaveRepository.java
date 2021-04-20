@@ -1,12 +1,10 @@
 package com.uz.shopapi.repository;
 
-import com.uz.shopapi.entity.Asos;
-import com.uz.shopapi.entity.AsosSlave;
+import com.uz.shopapi.Model.entity.AsosSlave;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import javax.persistence.Column;
 import java.util.List;
 
 public interface AsosSlaveRepository extends JpaRepository<AsosSlave,Integer> {
