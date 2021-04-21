@@ -80,7 +80,7 @@ public class MainServiceImpl implements MainService {
 
         if (main!=null){
 
-            SlaveMain slaveMain= mainSlaveRepository.findSlaveMainBySerial(main.getId(), requestMainSlave.getSlave_id());
+            SlaveMain slaveMain= mainSlaveRepository.findSlaveMainBySerial(main.getId());
             if(slaveMain==null){
                 slaveMain=new SlaveMain();
                 slaveMain.setDel_flag(1);
@@ -93,5 +93,13 @@ public class MainServiceImpl implements MainService {
             }
         }
         return 0;
+    }
+
+    @Override
+    public Integer deleteMainSlave(Integer id) throws Exception {
+        SlaveMain slaveMain=mainSlaveRepository.findById(id).get();
+        if (slaveMain==null) throw new Exception();
+        mainSlaveRepository.delete(slaveMain);
+        return id;
     }
 }

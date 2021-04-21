@@ -15,4 +15,6 @@ public interface MainService {
     List<ResponseOdMainSlave> getMainSlaves(int slaveid);
 
     Integer addMainSlave(RequestMainSlave requestMainSlave);
+
+    Integer deleteMainSlave(Integer id) throws Exception;
 }

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MainSlaveRepository extends JpaRepository<SlaveMain, Integer> {
 
-    @Query(value = "SELECT * FROM slave_main s WHERE s.main_id=:mainid and s.slave_id=:slaveid", nativeQuery = true)
-    SlaveMain findSlaveMainBySerial(Integer mainid, Integer slaveid);
+    @Query(value = "SELECT * FROM slave_main s WHERE s.main_id=:mainid and s.del_flag=1", nativeQuery = true)
+    SlaveMain findSlaveMainBySerial(Integer mainid);
 }
