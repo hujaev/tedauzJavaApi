@@ -209,7 +209,7 @@ public class Controller {
     public ResponseEntity<Integer> addMainSlave(@RequestBody RequestMainSlave requestMainSlave) {
         return ResponseEntity.ok(mainService.addMainSlave(requestMainSlave));
     }
-
+    // mayli yana qoshdim
     @DeleteMapping(path = "/delMainSlave/{id}")
     public ResponseEntity<Integer> deleteMainSlave(@PathVariable("id") Integer id) throws Exception {
         return ResponseEntity.ok(mainService.deleteMainSlave(id));

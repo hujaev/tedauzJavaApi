@@ -45,7 +45,7 @@ public class MainServiceImpl implements MainService {
                main1.setSerial(serial);
               return mainRepository.save(main1).getId();
            }else {
-               return 0;
+               return 777;
            }
        }
        else {
@@ -57,19 +57,20 @@ public class MainServiceImpl implements MainService {
     public List<ResponseOdMainSlave> getMainSlaves(int slaveid) {
         List<ResponseOdMainSlave> responseOdMainSlaves=new ArrayList<>();
         List<SlaveMain> listMainSlave=mainSlaveRepository.findAll();
+        //if (listMainSlave!=null){
+            for (SlaveMain slaveMain : listMainSlave) {
+                Main main = mainRepository.findById(slaveMain.getMain_id()).get();
+                if (main != null && slaveMain.getSlave_id() == slaveid) {
+                    ResponseOdMainSlave responseOdMainSlave = new ResponseOdMainSlave();
+                    responseOdMainSlave.setId(slaveMain.getId());
+                    responseOdMainSlave.setMain_id(slaveMain.getMain_id());
+                    responseOdMainSlave.setSlave_id(slaveMain.getSlave_id());
+                    responseOdMainSlave.setSerial(main.getSerial());
+                    responseOdMainSlaves.add(responseOdMainSlave);
+                }
+            } return  responseOdMainSlaves;
 
-        for (SlaveMain slaveMain : listMainSlave) {
-            Main main=mainRepository.findById(slaveMain.getMain_id()).get();
-            if (main!=null&&slaveMain.getSlave_id()==slaveid){
-                ResponseOdMainSlave responseOdMainSlave =new ResponseOdMainSlave();
-                responseOdMainSlave.setId(slaveMain.getId());
-                responseOdMainSlave.setMain_id(slaveMain.getMain_id());
-                responseOdMainSlave.setSlave_id(slaveMain.getSlave_id());
-                responseOdMainSlave.setSerial(main.getSerial());
-                responseOdMainSlaves.add(responseOdMainSlave);
-            }
-        }
-        return  responseOdMainSlaves;
+
     }
 
     @Override
@@ -78,7 +79,7 @@ public class MainServiceImpl implements MainService {
 
         Main main = mainRepository.selectMain(requestMainSlave.getSerial());
 
-        if (main!=null){
+        //if (main!=null){
 
             SlaveMain slaveMain= mainSlaveRepository.findSlaveMainBySerial(main.getId());
             if(slaveMain==null){
@@ -91,8 +92,7 @@ public class MainServiceImpl implements MainService {
             }else{
                 return -slaveMain.getId();
             }
-        }
-        return 0;
+        //}  return 99999;
     }
 
     @Override
