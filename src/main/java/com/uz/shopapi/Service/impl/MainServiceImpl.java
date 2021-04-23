@@ -26,14 +26,23 @@ public class MainServiceImpl implements MainService {
 
     @Override
     public Integer addMain(String serial) {
+        Integer Id=0;
         Main main1=mainRepository.selectMain(serial);
         if (main1==null){
             Main main=new Main();
 //        BeanUtils.copyProperties(mainDto, main);
             main.setSerial(serial);
-            return  mainRepository.save(main).getId();
+            Id=mainRepository.save(main).getId();
+        } else{
+            Id=main1.getId();
         }
-        return main1.getId();
+
+        SlaveMain mainslave1=mainSlaveRepository.selectMainSlave(Id);
+        if (mainslave1==null){
+            return Id;
+        } else  {
+            return -mainslave1.getId();
+        }
     }
 
     @Override
@@ -59,7 +68,11 @@ public class MainServiceImpl implements MainService {
         List<SlaveMain> listMainSlave=mainSlaveRepository.findAll();
         //if (listMainSlave!=null){
             for (SlaveMain slaveMain : listMainSlave) {
+
                 Main main = mainRepository.findById(slaveMain.getMain_id()).get();
+                if(main==null){
+                    return  responseOdMainSlaves;
+                }
                 if (main != null && slaveMain.getSlave_id() == slaveid) {
                     ResponseOdMainSlave responseOdMainSlave = new ResponseOdMainSlave();
                     responseOdMainSlave.setId(slaveMain.getId());
