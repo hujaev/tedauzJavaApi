@@ -9,10 +9,10 @@ public class AsosDto {
     Integer xodimId;
     Integer haridorId;
     String  sana;
-    Integer dilerId;
-    Integer turOper;
+    Integer diler_id;
+    Integer tur_oper;
     Double summa;
-    Integer sotuvTuri;
+    Integer sotuv_turi;
     String nomer;
     Integer del_flag;
     Integer dollar;
@@ -24,17 +24,17 @@ public class AsosDto {
     public AsosDto() {
     }
 
-    public AsosDto(Integer id, Integer client_id, Integer userId, Integer xodimId, Integer haridorId, String sana, Integer dilerId, Integer turOper, Double summa, Integer sotuvTuri, String nomer, Integer del_flag, Integer dollar, Double kurs, Double sum_d, Integer kol) {
+    public AsosDto(Integer id, Integer client_id, Integer userId, Integer xodimId, Integer haridorId, String sana, Integer diler_id, Integer turOper, Double summa, Integer sotuvTuri, String nomer, Integer del_flag, Integer dollar, Double kurs, Double sum_d, Integer kol) {
         this.id = id;
         this.client_id = client_id;
         this.userId = userId;
         this.xodimId = xodimId;
         this.haridorId = haridorId;
         this.sana = sana;
-        this.dilerId = dilerId;
-        this.turOper = turOper;
+        this.diler_id = diler_id;
+        this.tur_oper = turOper;
         this.summa = summa;
-        this.sotuvTuri = sotuvTuri;
+        this.sotuv_turi = sotuvTuri;
         this.nomer = nomer;
         this.del_flag = del_flag;
         this.dollar = dollar;
@@ -55,12 +55,12 @@ public class AsosDto {
         return id;
     }
 
-    public Integer getSotuvTuri() {
-        return sotuvTuri;
+    public Integer getSotuv_turi() {
+        return sotuv_turi;
     }
 
-    public void setSotuvTuri(Integer sotuvTuri) {
-        this.sotuvTuri = sotuvTuri;
+    public void setSotuv_turi(Integer sotuv_turi) {
+        this.sotuv_turi = sotuv_turi;
     }
 
     public Integer getHaridorId() {
@@ -101,20 +101,20 @@ public class AsosDto {
         this.sana = sana;
     }
 
-    public Integer getDilerId() {
-        return dilerId;
+    public Integer getDiler_id() {
+        return diler_id;
     }
 
-    public void setDilerId(Integer dilerId) {
-        this.dilerId = dilerId;
+    public void setDiler_id(Integer diler_id) {
+        this.diler_id = diler_id;
     }
 
-    public Integer getTurOper() {
-        return turOper;
+    public Integer getTur_oper() {
+        return tur_oper;
     }
 
-    public void setTurOper(Integer turOper) {
-        this.turOper = turOper;
+    public void setTur_oper(Integer tur_oper) {
+        this.tur_oper = tur_oper;
     }
 
     public Double getSumma() {
