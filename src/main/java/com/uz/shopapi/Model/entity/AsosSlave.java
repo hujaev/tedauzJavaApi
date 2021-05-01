@@ -149,9 +149,7 @@ public class AsosSlave implements Serializable {
         this.resept = resept;
     }
 
-    public Double getSotish_in() {
-        return sotish_in;
-    }
+    public Double getSotish_in() { return sotish_in;}
 
     public void setSotish_in(Double sotish_in) {
         this.sotish_in = sotish_in;

@@ -153,8 +153,15 @@ public class ProductsServiceimpl implements ProductsService{
             asosSlave.setSubkod(0);
             asosSlave.setSumma_all_ost(0.0);
             asosSlave.setSumma_all(0.0);
+            asosSlave.setSumma(0.0);
             asosSlave.setSumma_in(0.0);
             asosSlave.setTuri(0);
+            if (product.getSotish()>0){
+                asosSlave.setSotish(product.getSotish());
+            }else{
+
+                asosSlave.setSotish(0.0);
+            }
             if (product.getSotish()>0){
                 asosSlave.setSotish(product.getSotish());
             }else{
