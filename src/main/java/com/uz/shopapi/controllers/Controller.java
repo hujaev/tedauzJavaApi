@@ -8,6 +8,7 @@ import com.uz.shopapi.Service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -95,6 +96,7 @@ public class Controller {
         List<AsosSlaveDto> list=asosSlaveService.listGetAsosSlave(tovarid); //listAddProducts(asosid);
         return ResponseEntity.ok(list);
     }
+
     @PostMapping(value = "asoss")
     public ResponseEntity<List<AsosDto>> get(@RequestBody AsosDto asosDto){
         List<AsosDto> list=asosService.get(asosDto);

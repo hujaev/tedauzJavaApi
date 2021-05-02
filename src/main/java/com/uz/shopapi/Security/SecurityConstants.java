@@ -1,6 +1,5 @@
 package com.uz.shopapi.Security;
 
-import com.uz.shopapi.Model.LoginModel.SpringApplicationContext;
 import org.springframework.beans.factory.annotation.Value;
 
 public class SecurityConstants {
@@ -10,11 +9,6 @@ public class SecurityConstants {
     public static final String HEADER_STRING="Authorization";
     public static final String SIGN_UP_URL="/auth/signUp";
 
-    @Value("${tokenSecret}")
-    public static String TOKEN_SECRET;
+    public static final String TOKEN_SECRET="QurbanovUlugbek";
 
-    public static String getTokenSecret(){
-        AppProperties appProperties=(AppProperties) SpringApplicationContext.getBean("AppProperties");
-        return appProperties.getTokenSexret();
-    }
 }

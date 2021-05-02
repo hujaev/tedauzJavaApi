@@ -189,8 +189,10 @@ public class ProductsServiceimpl implements ProductsService{
 
     @Override
     public void del(Integer id) {
+
         Product product=productsRepository.findById(id).get();
         product.setDel_flag(0);
+
     }
 
     @Override

@@ -3,25 +3,25 @@ package com.uz.shopapi.Model.LoginModel;
 
 public class UserLoginRequestModel {
 
-    private String login;
-    private String password;
+    private String username;
+    private String userpass;
 
     public UserLoginRequestModel() {
     }
 
-    public String getEmail() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserpass() {
+        return userpass;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserpass(String userpass) {
+        this.userpass = userpass;
     }
 }

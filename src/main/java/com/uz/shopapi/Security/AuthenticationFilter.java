@@ -1,9 +1,7 @@
 package com.uz.shopapi.Security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.uz.shopapi.Model.LoginModel.SpringApplicationContext;
 import com.uz.shopapi.Model.LoginModel.UserLoginRequestModel;
-import com.uz.shopapi.Service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,8 +35,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
             UserLoginRequestModel creds=new ObjectMapper().readValue(request.getInputStream(), UserLoginRequestModel.class);
 
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                creds.getEmail(),
-                creds.getPassword(),
+                creds.getUsername(),
+                creds.getUserpass(),
                 new ArrayList<>())
             );
         } catch (IOException e) {
@@ -56,9 +54,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         String token= Jwts.builder()
                 .setSubject(userName)
                 .setExpiration(new Date(System.currentTimeMillis()+SecurityConstants.EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS512, SecurityConstants.getTokenSecret())
+                .signWith(SignatureAlgorithm.HS512, SecurityConstants.TOKEN_SECRET)
                 .compact();
-        UserService userService=(UserService) SpringApplicationContext.getBean("userServiceImpl");
         response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX+token);
     }
 }
