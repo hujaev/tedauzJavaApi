@@ -227,7 +227,7 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
                 productsDto.setPrice(asosSlaveList.get(i).getSotish());
             }
             else{
-                productsDto.setInprice(0.0);
+                productsDto.setPrice(0.0);
             }
             if (asosSlaveList.get(i).getSotish_in() != null){
                 productsDto.setInprice(asosSlaveList.get(i).getSotish_in());

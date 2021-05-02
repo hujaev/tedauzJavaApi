@@ -14,9 +14,7 @@ public class ProductsDto {
     Double sena_d;
     Double sena_in_d;
     String shtrix_full;
-
-
-
+    Integer seriya;
 
     public ProductsDto() {
         this.nameShort="";
@@ -24,7 +22,12 @@ public class ProductsDto {
         this.shtrix="";
         this.sena_d=0.0;
         this.sena_in_d=0.0;
+        this.seriya=0;
+
     }
+    public Integer getSeriya() { return seriya; }
+
+    public void setSeriya(Integer seriya) { this.seriya = seriya; }
 
     public String getShtrix_full() {
         return shtrix_full;

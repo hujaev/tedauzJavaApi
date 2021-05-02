@@ -26,14 +26,23 @@ public class MainServiceImpl implements MainService {
 
     @Override
     public Integer addMain(String serial) {
+        Integer Id=0;
         Main main1=mainRepository.selectMain(serial);
         if (main1==null){
             Main main=new Main();
 //        BeanUtils.copyProperties(mainDto, main);
             main.setSerial(serial);
-            return  mainRepository.save(main).getId();
+            Id=mainRepository.save(main).getId();
+        } else{
+            Id=main1.getId();
         }
-        return main1.getId();
+
+        SlaveMain mainslave1=mainSlaveRepository.selectMainSlave(Id);
+        if (mainslave1==null){
+            return Id;
+        } else  {
+            return -mainslave1.getId();
+        }
     }
 
     @Override
@@ -45,7 +54,7 @@ public class MainServiceImpl implements MainService {
                main1.setSerial(serial);
               return mainRepository.save(main1).getId();
            }else {
-               return 0;
+               return 777;
            }
        }
        else {
@@ -57,19 +66,24 @@ public class MainServiceImpl implements MainService {
     public List<ResponseOdMainSlave> getMainSlaves(int slaveid) {
         List<ResponseOdMainSlave> responseOdMainSlaves=new ArrayList<>();
         List<SlaveMain> listMainSlave=mainSlaveRepository.findAll();
+        //if (listMainSlave!=null){
+            for (SlaveMain slaveMain : listMainSlave) {
 
-        for (SlaveMain slaveMain : listMainSlave) {
-            Main main=mainRepository.findById(slaveMain.getMain_id()).get();
-            if (main!=null&&slaveMain.getSlave_id()==slaveid){
-                ResponseOdMainSlave responseOdMainSlave =new ResponseOdMainSlave();
-                responseOdMainSlave.setId(slaveMain.getId());
-                responseOdMainSlave.setMain_id(slaveMain.getMain_id());
-                responseOdMainSlave.setSlave_id(slaveMain.getSlave_id());
-                responseOdMainSlave.setSerial(main.getSerial());
-                responseOdMainSlaves.add(responseOdMainSlave);
-            }
-        }
-        return  responseOdMainSlaves;
+                Main main = mainRepository.findById(slaveMain.getMain_id()).get();
+                if(main==null){
+                    return  responseOdMainSlaves;
+                }
+                if (main != null && slaveMain.getSlave_id() == slaveid) {
+                    ResponseOdMainSlave responseOdMainSlave = new ResponseOdMainSlave();
+                    responseOdMainSlave.setId(slaveMain.getId());
+                    responseOdMainSlave.setMain_id(slaveMain.getMain_id());
+                    responseOdMainSlave.setSlave_id(slaveMain.getSlave_id());
+                    responseOdMainSlave.setSerial(main.getSerial());
+                    responseOdMainSlaves.add(responseOdMainSlave);
+                }
+            } return  responseOdMainSlaves;
+
+
     }
 
     @Override
@@ -78,9 +92,9 @@ public class MainServiceImpl implements MainService {
 
         Main main = mainRepository.selectMain(requestMainSlave.getSerial());
 
-        if (main!=null){
+        //if (main!=null){
 
-            SlaveMain slaveMain= mainSlaveRepository.findSlaveMainBySerial(main.getId(), requestMainSlave.getSlave_id());
+            SlaveMain slaveMain= mainSlaveRepository.findSlaveMainBySerial(main.getId());
             if(slaveMain==null){
                 slaveMain=new SlaveMain();
                 slaveMain.setDel_flag(1);
@@ -91,7 +105,14 @@ public class MainServiceImpl implements MainService {
             }else{
                 return -slaveMain.getId();
             }
-        }
-        return 0;
+        //}  return 99999;
+    }
+
+    @Override
+    public Integer deleteMainSlave(Integer id) throws Exception {
+        SlaveMain slaveMain=mainSlaveRepository.findById(id).get();
+        if (slaveMain==null) throw new Exception();
+        mainSlaveRepository.delete(slaveMain);
+        return id;
     }
 }

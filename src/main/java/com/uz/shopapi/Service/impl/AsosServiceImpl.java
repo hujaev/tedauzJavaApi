@@ -25,7 +25,7 @@ public class AsosServiceImpl implements AsosService {
     @Override
     public AsosDto getAsos(AsosDto asosDto) {
 
-        Asos selectAsos = asosRepository.selectAsos(asosDto.getUserId(), asosDto.getDilerId());
+        Asos selectAsos = asosRepository.selectAsos(asosDto.getUserId(), asosDto.getDiler_id());
 
         if(selectAsos==null){
             selectAsos=new Asos();
@@ -36,16 +36,16 @@ public class AsosServiceImpl implements AsosService {
             selectAsos.setDel_flag(1);
             selectAsos.setUser_id(asosDto.getUserId());
             selectAsos.setClient_id(asosDto.getClient_id());
-            selectAsos.setDiler_id(asosDto.getDilerId());
+            selectAsos.setDiler_id(asosDto.getDiler_id());
             selectAsos.setXodim_id(asosDto.getXodimId());
             selectAsos.setH_id(asosDto.getHaridorId());
             selectAsos.setSumma(asosDto.getSumma());
-            selectAsos.setTur_oper(asosDto.getTurOper());
-            selectAsos.setSotuv_turi(asosDto.getSotuvTuri());
+            selectAsos.setTur_oper(asosDto.getTur_oper());
+            selectAsos.setSotuv_turi(asosDto.getSotuv_turi());
             asosRepository.save(selectAsos);
         }
 
-        selectAsos = asosRepository.selectAsos(asosDto.getUserId(), asosDto.getDilerId());
+        selectAsos = asosRepository.selectAsos(asosDto.getUserId(), asosDto.getDiler_id());
 
 
         asosDto.setId(selectAsos.getId());
@@ -53,11 +53,11 @@ public class AsosServiceImpl implements AsosService {
         asosDto.setUserId(selectAsos.getUser_id());
         asosDto.setXodimId(selectAsos.getXodim_id());
         asosDto.setSana(selectAsos.getSana());
-        asosDto.setDilerId(selectAsos.getDiler_id());
+        asosDto.setDiler_id(selectAsos.getDiler_id());
         asosDto.setHaridorId(selectAsos.getH_id());
-        asosDto.setTurOper(selectAsos.getTur_oper());
+        asosDto.setTur_oper(selectAsos.getTur_oper());
         asosDto.setSumma(selectAsos.getSumma());
-        asosDto.setSotuvTuri(selectAsos.getSotuv_turi());
+        asosDto.setSotuv_turi(selectAsos.getSotuv_turi());
 
         return asosDto;
     }
@@ -67,15 +67,15 @@ public class AsosServiceImpl implements AsosService {
     public List<AsosDto> get(AsosDto asosDto) {
         List<Asos> list=asosRepository.selectAsosGet(asosDto.getClient_id());
         List<AsosDto> answers=new ArrayList<>();
-        if (list.isEmpty()){
+        if (false){
             Asos newasos=new Asos();
             newasos.setClient_id(asosDto.getClient_id());
             newasos.setDel_flag(asosDto.getDel_flag());
-            if (asosDto.getDilerId().equals(null)){
+            if (asosDto.getDiler_id().equals(null)){
                 newasos.setDiler_id(0);
             }
             else {
-                newasos.setDiler_id(asosDto.getDilerId());
+                newasos.setDiler_id(asosDto.getDiler_id());
             }
             if (asosDto.getDollar().equals(null)){
                 newasos.setDollar(0);
@@ -114,10 +114,10 @@ public class AsosServiceImpl implements AsosService {
             else {
                 newasos.setSana(asosDto.getSana());
             }
-            newasos.setSotuv_turi(asosDto.getSotuvTuri());
+            newasos.setSotuv_turi(asosDto.getSotuv_turi());
             newasos.setSum_d(asosDto.getSum_d());
             newasos.setSumma(asosDto.getSumma());
-            newasos.setTur_oper(asosDto.getTurOper());
+            newasos.setTur_oper(asosDto.getTur_oper());
             newasos.setUser_id(asosDto.getUserId());
             newasos.setXodim_id(asosDto.getXodimId());
             asosRepository.save(newasos);
@@ -133,17 +133,17 @@ public class AsosServiceImpl implements AsosService {
             dto.setId(asos.getId());
             dto.setClient_id(asos.getClient_id());
             dto.setDel_flag(asos.getDel_flag());
-            dto.setDilerId(asos.getDiler_id());
+            dto.setDiler_id(asos.getDiler_id());
             dto.setDollar(asos.getDollar());
             dto.setHaridorId(asos.getH_id());
             dto.setKol(asos.getKol());
             dto.setKurs(asos.getKurs());
             dto.setNomer(asos.getNomer());
             dto.setSana(asos.getSana());
-            dto.setSotuvTuri(asos.getSotuv_turi());
+            dto.setSotuv_turi(asos.getSotuv_turi());
             dto.setSum_d(asos.getSum_d());
             dto.setSumma(asos.getSumma());
-            dto.setTurOper(asos.getTur_oper());
+            dto.setTur_oper(asos.getTur_oper());
             dto.setUserId(asos.getUser_id());
             dto.setXodimId(asos.getXodim_id());
             answers.add(dto);
@@ -276,9 +276,9 @@ public class AsosServiceImpl implements AsosService {
     public AsosDto editAsos(AsosDto asosDto) {
         Asos asos = asosRepository.findById(asosDto.getId()).get();
         if (asos != null){
-            Asos asos1=new Asos();
-            BeanUtils.copyProperties(asosDto, asos1);
-            asosRepository.save(asos1);
+
+            BeanUtils.copyProperties(asosDto, asos);
+            asosRepository.save(asos);
         }
         return asosDto;
     }

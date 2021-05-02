@@ -116,6 +116,11 @@ public class ProductsServiceimpl implements ProductsService{
                 productsDto.setShtrix_full((String)object[(object.length -1)]);
             else
                 productsDto.setShtrix_full("");
+            /*if (object[(object.length -1)]!=null)
+                productsDto.setSeriya((Integer)object[(object.length -1)]);
+            else
+                productsDto.setSeriya(1);
+            */
 
             list.add(productsDto);
         }
@@ -148,8 +153,15 @@ public class ProductsServiceimpl implements ProductsService{
             asosSlave.setSubkod(0);
             asosSlave.setSumma_all_ost(0.0);
             asosSlave.setSumma_all(0.0);
+            asosSlave.setSumma(0.0);
             asosSlave.setSumma_in(0.0);
             asosSlave.setTuri(0);
+            if (product.getSotish()>0){
+                asosSlave.setSotish(product.getSotish());
+            }else{
+
+                asosSlave.setSotish(0.0);
+            }
             if (product.getSotish()>0){
                 asosSlave.setSotish(product.getSotish());
             }else{
@@ -386,6 +398,12 @@ public class ProductsServiceimpl implements ProductsService{
         }
         else {
             productDto.setKol_in(0);
+        }
+        if (product.getSeriya() != null){
+            productDto.setSeriya(product.getSeriya());
+        }
+        else {
+            productDto.setSeriya(0);
         }
     }
 
