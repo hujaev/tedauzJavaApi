@@ -1,5 +1,4 @@
 package com.uz.shopapi.Service.impl;
-
 import com.uz.shopapi.Model.Request.RequestMainSlave;
 import com.uz.shopapi.Model.Response.ResponseOdMainSlave;
 import com.uz.shopapi.Model.entity.Main;
@@ -9,21 +8,14 @@ import com.uz.shopapi.repository.MainSlaveRepository;
 import com.uz.shopapi.Service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
-
-
 @Service
 public class MainServiceImpl implements MainService {
-
     @Autowired
     MainRepository mainRepository;
-
     @Autowired
     MainSlaveRepository mainSlaveRepository;
-
-
     @Override
     public Integer addMain(String serial) {
         Integer Id=0;
@@ -44,7 +36,6 @@ public class MainServiceImpl implements MainService {
             return -mainslave1.getId();
         }
     }
-
     @Override
     public Integer checkMainSerial(String serial, Integer check) {
        Main main = mainRepository.selectMain(serial);
@@ -61,7 +52,6 @@ public class MainServiceImpl implements MainService {
            return main.getId();
        }
     }
-
     @Override
     public List<ResponseOdMainSlave> getMainSlaves(int slaveid) {
         List<ResponseOdMainSlave> responseOdMainSlaves=new ArrayList<>();
@@ -85,7 +75,6 @@ public class MainServiceImpl implements MainService {
 
 
     }
-
     @Override
     public Integer addMainSlave(RequestMainSlave requestMainSlave) {
 
@@ -107,7 +96,6 @@ public class MainServiceImpl implements MainService {
             }
         //}  return 99999;
     }
-
     @Override
     public Integer deleteMainSlave(Integer id) throws Exception {
         SlaveMain slaveMain=mainSlaveRepository.findById(id).get();
