@@ -4,6 +4,7 @@ package com.uz.shopapi.controllers;
 import com.uz.shopapi.Model.Request.RequestMainSlave;
 import com.uz.shopapi.Model.dto.*;
 import com.uz.shopapi.Model.Response.ResponseOdMainSlave;
+import com.uz.shopapi.Model.entity.AsosSlave;
 import com.uz.shopapi.Service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,8 +102,13 @@ public class Controller {
     }
 
     @GetMapping(value = "/getAsosSlave/{tovarid}")
-    public ResponseEntity<List<AsosSlaveDto>> getAsosSlave(@PathVariable Integer tovarid) {
-        List<AsosSlaveDto> list = asosSlaveService.listGetAsosSlave(tovarid); //listAddProducts(asosid);
+    public ResponseEntity<List<AsosSlave>> getAsosSlave(@PathVariable Integer tovarid) {
+        List<AsosSlave> list = asosSlaveService.listGetAsosSlave(tovarid); //listAddProducts(asosid);
+        return ResponseEntity.ok(list);
+    }
+    @GetMapping(value = "/getKirimSlave/{asosid}")
+    public ResponseEntity<List<SlaveDto>> getKirimSlave(@PathVariable Integer asosid) {
+        List<SlaveDto> list = asosSlaveService.listGetKirimSlave(asosid);
         return ResponseEntity.ok(list);
     }
 
@@ -154,8 +160,8 @@ public class Controller {
     }
 
     @PostMapping(value = "/asosslave2/{asosid}/{userid}", produces = "application/json;charset=UTF-8")
-    public ResponseEntity<Integer> asosSlaveSave2(@PathVariable Integer asosid, @PathVariable Integer userid, @RequestBody ProductsDto productsDto) {
-        Integer result = asosSlaveService.addProducts2(1, asosid, userid, productsDto);
+    public ResponseEntity<Integer> asosSlaveSave2(@PathVariable Integer asosid, @PathVariable Integer userid, @RequestBody SlaveDto slaveDto) {
+        Integer result = asosSlaveService.addProducts2(1, asosid, userid, slaveDto);
         return ResponseEntity.ok(result);
     }
 
@@ -169,6 +175,12 @@ public class Controller {
     @DeleteMapping(value = "/delasosslave/{asosid}/{id}", produces = "application/json;charset=UTF-8")
     public ResponseEntity<Boolean> asosSlaveDelete(@PathVariable Integer asosid, @PathVariable Integer id) {
         Boolean result = asosSlaveService.delProducts(0, asosid, id);
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping(value = "/saveinslave", produces = "application/json;charset=UTF-8")
+    public ResponseEntity<Boolean> saveinslave(@RequestBody SlaveDto slaveDto) {
+        Boolean result = asosSlaveService.saveinslave(slaveDto);
         return ResponseEntity.ok(result);
     }
 

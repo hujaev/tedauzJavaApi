@@ -145,10 +145,10 @@ public class ProductsServiceimpl implements ProductsService{
             asosSlave.setAsos_id(asos.getId());
             asosSlave.setUser_id(product.getUser_id());
             asosSlave.setKol(product.getTkol());
-            asosSlave.setKolIn(product.getTkol_in());
+            asosSlave.setKol_in(product.getTkol_in());
             asosSlave.setDel_flag(1);
-            asosSlave.setKolOst(product.getTkol());
-            asosSlave.setKolInOst(product.getTkol_in());
+            asosSlave.setKol_ost(product.getTkol());
+            asosSlave.setKol_in_ost(product.getTkol_in());
             asosSlave.setResept(0);
             asosSlave.setSubkod(0);
             asosSlave.setSumma_all_ost(0.0);
