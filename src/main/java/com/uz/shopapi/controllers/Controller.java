@@ -1,10 +1,11 @@
 package com.uz.shopapi.controllers;
-
+//1
 
 import com.uz.shopapi.Model.Request.RequestMainSlave;
 import com.uz.shopapi.Model.dto.*;
-import com.uz.shopapi.Model.Response.ResponseOdMainSlave;
+//import com.uz.shopapi.Model.Response.ResponseOdMainSlave;
 import com.uz.shopapi.Model.entity.AsosSlave;
+import com.uz.shopapi.Model.entity.SlaveMain;
 import com.uz.shopapi.Service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,11 +102,7 @@ public class Controller {
         return ResponseEntity.ok(list);
     }
 
-    @GetMapping(value = "/getAsosSlave/{tovarid}")
-    public ResponseEntity<List<AsosSlave>> getAsosSlave(@PathVariable Integer tovarid) {
-        List<AsosSlave> list = asosSlaveService.listGetAsosSlave(tovarid); //listAddProducts(asosid);
-        return ResponseEntity.ok(list);
-    }
+
     @GetMapping(value = "/getKirimSlave/{asosid}")
     public ResponseEntity<List<SlaveDto>> getKirimSlave(@PathVariable Integer asosid) {
         List<SlaveDto> list = asosSlaveService.listGetKirimSlave(asosid);
@@ -212,10 +209,17 @@ public class Controller {
         return ResponseEntity.ok(mainService.checkMainSerial(serial, check));
     }
 
-    @GetMapping(path = "/getMainSlave/{slaveid}")
-    public ResponseEntity<List<ResponseOdMainSlave>> getMainSlave(@PathVariable int slaveid) {
-        return ResponseEntity.ok(mainService.getMainSlaves(slaveid));
+    @GetMapping(value = "/getAsosSlave/{tovarid}")
+    public ResponseEntity<List<AsosSlave>> getAsosSlave(@PathVariable Integer tovarid) {
+        List<AsosSlave> list = asosSlaveService.listGetAsosSlave(tovarid); //listAddProducts(asosid);
+        return ResponseEntity.ok(list);
     }
+
+    @GetMapping(path = "/getMainSlave/{slaveId}")
+    public ResponseEntity<List<SlaveMain>>getMainSlave(@PathVariable Integer slaveId) {
+        List<SlaveMain> list = mainService.getMainSlavesSlaveId(slaveId);
+        return ResponseEntity.ok(list);
+     }
 
     @PostMapping(path = "/addMainSlave")
     public ResponseEntity<Integer> addMainSlave(@RequestBody RequestMainSlave requestMainSlave) {

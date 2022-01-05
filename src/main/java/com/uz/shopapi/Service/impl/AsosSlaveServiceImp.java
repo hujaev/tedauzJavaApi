@@ -32,7 +32,7 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
 
         Integer type=asosRepository.findById(asosId ).get().getSotuv_turi();
 
-        List<AsosSlave> list;
+        List<AsosSlave>list;
         if(type==1) {
             list = asosSlaveRepository.selectChakanaProductsFull(productsDto.getPrice(),  productsDto.getProductId());
         }
@@ -197,7 +197,7 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
             asosSlaveInsert.setIzm_id(asosSlave.getIzm_id());
             asosSlaveInsert.setIzm1(asosSlave.getIzm1());
 
-            res=asosSlaveRepository.save(asosSlaveInsert);
+            res=asosSlaveRepository.save(asosSlaveInsert);//888
 
         }
         return res.getId();
@@ -263,7 +263,6 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
     @Override
     public List<AsosSlave> listGetAsosSlave(Integer tovarId) {
         List<AsosSlave> listAsosSlave=asosSlaveRepository.findAsosSlavesByTovarId(tovarId);
-
         return listAsosSlave;
     }
 
@@ -304,12 +303,12 @@ public class AsosSlaveServiceImp implements AsosSlaveService {
         asosSlave.setSena(slaveDto.getSena());
         asosSlave.setSena_in(slaveDto.getSena_in());
         asosSlave.setSubkod(1);
+        asosSlave.setSumma_all_ost(0.00);
         //asosSlave.setSumma_all_ost(productsDto.getPrice()*productsDto.getCount()+
                 //productsDto.getInprice()*productsDto.getIncount());
         asosSlave.setTuri(1);
         asosSlave.setZakaz_see(0.0);
-
-        return asosSlaveRepository.save(asosSlave).getId();
+        return asosSlaveRepository.save(asosSlave).getId().intValue();
     }
 
     @Override

@@ -7,17 +7,26 @@ public class SlaveMainDto {
     Integer slave_id;
     Integer main_id;
     Integer del_flag;
+    String serial;
 
-    public SlaveMainDto() {
-    }
 
-    public SlaveMainDto(Integer id, Integer slave_id, Integer main_id, Integer del_flag) {
+    public SlaveMainDto(Integer id, Integer slave_id, Integer main_id, Integer del_flag, String serial) {
         this.id = id;
         this.slave_id = slave_id;
         this.main_id = main_id;
         this.del_flag = del_flag;
+        this.serial = serial;
+    }
+    public String getSerial() {
+        return serial;
     }
 
+    public void setSerial(String serial) {
+        this.serial = serial;
+    }
+
+    public SlaveMainDto() {
+    }
     public Integer getId() {
         return id;
     }
@@ -52,11 +61,12 @@ public class SlaveMainDto {
 
     @Override
     public String toString() {
-        return "MainDto{" +
+        return "SlaveMainDto{" +
                 "id=" + id +
                 ", slave_id=" + slave_id +
                 ", main_id=" + main_id +
                 ", del_flag=" + del_flag +
+                ", serial='" + serial +"\'"+
                 '}';
     }
 }

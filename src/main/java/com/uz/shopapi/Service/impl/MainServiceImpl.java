@@ -1,6 +1,5 @@
 package com.uz.shopapi.Service.impl;
 import com.uz.shopapi.Model.Request.RequestMainSlave;
-import com.uz.shopapi.Model.Response.ResponseOdMainSlave;
 import com.uz.shopapi.Model.entity.Main;
 import com.uz.shopapi.Model.entity.SlaveMain;
 import com.uz.shopapi.repository.MainRepository;
@@ -8,7 +7,7 @@ import com.uz.shopapi.repository.MainSlaveRepository;
 import com.uz.shopapi.Service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 @Service
 public class MainServiceImpl implements MainService {
@@ -53,35 +52,16 @@ public class MainServiceImpl implements MainService {
        }
     }
     @Override
-    public List<ResponseOdMainSlave> getMainSlaves(int slaveid) {
-        List<ResponseOdMainSlave> responseOdMainSlaves=new ArrayList<>();
-        List<SlaveMain> listMainSlave=mainSlaveRepository.findAll();
-        //if (listMainSlave!=null){
-            for (SlaveMain slaveMain : listMainSlave) {
-
-                Main main = mainRepository.findById(slaveMain.getMain_id()).get();
-                if(main==null){
-                    return  responseOdMainSlaves;
-                }
-                if (main != null && slaveMain.getSlave_id() == slaveid) {
-                    ResponseOdMainSlave responseOdMainSlave = new ResponseOdMainSlave();
-                    responseOdMainSlave.setId(slaveMain.getId());
-                    responseOdMainSlave.setMain_id(slaveMain.getMain_id());
-                    responseOdMainSlave.setSlave_id(slaveMain.getSlave_id());
-                    responseOdMainSlave.setSerial(main.getSerial());
-                    responseOdMainSlaves.add(responseOdMainSlave);
-                }
-            } return  responseOdMainSlaves;
-
-
+    public List<SlaveMain> getMainSlavesSlaveId(Integer slaveId) {
+        List<SlaveMain> listMainSlave=mainSlaveRepository.findSlaveMainBySlaveId(slaveId);
+        return  listMainSlave;
     }
+
     @Override
     public Integer addMainSlave(RequestMainSlave requestMainSlave) {
 
 
         Main main = mainRepository.selectMain(requestMainSlave.getSerial());
-
-        //if (main!=null){
 
             SlaveMain slaveMain= mainSlaveRepository.findSlaveMainBySerial(main.getId());
             if(slaveMain==null){

@@ -37,6 +37,8 @@ public class Main implements Serializable {
     private Integer parent_id;
     @Column(name = "slave_id")
     private Integer slave_id;
+    @Column(name = "MAIN_ID")
+    private Integer projectId;
 
     public Integer getId() {
         return id;

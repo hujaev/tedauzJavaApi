@@ -14,6 +14,7 @@ public interface AsosSlaveRepository extends JpaRepository<AsosSlave,Integer> {
     @Query(value = "SELECT  a.id,a.tovar_id,a.asos_id,a.user_id,a.tovar_nom,SUM(a.kol) AS kol,SUM(a.kol_in) AS kol_in,a.kol_ost,a.kol_in_ost,a.summa,a.summa_in,a.summa_all,a.sotish,a.sotish_in,a.sena,a.sena_in,a.turi,a.subkod,a.del_flag,a.summa_all_ost,a.zakaz_see,a.resept,a.izm_id,a.izm1 FROM asos_slave a WHERE a.asos_id=:asosid AND a.del_flag=1  GROUP BY a.tovar_id, a.sotish ORDER BY a.tovar_nom",nativeQuery = true)
     public List<AsosSlave> selectByAsosId(@Param("asosid") Integer asosId);
 
+
     @Query(value = "SELECT  a.id,a.tovar_id,a.asos_id,a.user_id,a.tovar_nom,SUM(a.kol) AS kol,SUM(a.kol_in) AS kol_in,a.kol_ost,a.kol_in_ost,a.summa,a.summa_in,a.summa_all,a.sotish,a.sotish_in,a.sena,a.sena_in,a.turi,a.subkod,a.del_flag,a.summa_all_ost,a.zakaz_see,a.resept,a.izm_id,a.izm1 FROM asos_slave a WHERE a.tovar_id=:tovarid AND a.del_flag=1  GROUP BY a.tovar_id, a.sotish ORDER BY a.tovar_nom",nativeQuery = true)
     public List<AsosSlave> selectBytovarId(@Param("tovarid") Integer tovarId);
 

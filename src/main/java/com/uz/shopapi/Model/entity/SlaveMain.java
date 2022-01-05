@@ -2,12 +2,15 @@ package com.uz.shopapi.Model.entity;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.io.Serializable;
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "slave_main")
 @EntityListeners(AuditingEntityListener.class)
-public class SlaveMain {
+public class SlaveMain implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
@@ -15,16 +18,21 @@ public class SlaveMain {
     Integer slave_id;
     @Column(name = "main_id")
     Integer main_id;
+    @Column(name = "serial")
+    String serial;
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
+    }
+
     @Column(name = "del_flag")
     Integer del_flag;
 
     public SlaveMain() {
-    }
 
-    public SlaveMain(Integer slave_id, Integer main_id, Integer del_flag) {
-        this.slave_id = slave_id;
-        this.main_id = main_id;
-        this.del_flag = del_flag;
     }
 
     public Integer getId() {
