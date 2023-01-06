@@ -8,6 +8,7 @@ import com.uz.shopapi.Model.entity.AsosSlave;
 import com.uz.shopapi.Model.entity.SlaveMain;
 import com.uz.shopapi.Service.*;
 
+import com.uz.shopapi.Service.impl.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
@@ -48,7 +49,18 @@ public class Controller {
     @Autowired
     MainService mainService;
 
+    @Autowired
+    MessageService messageService;
 
+    @GetMapping("/sms")
+    public ResponseEntity<?> getAll(@RequestParam int del_flag){
+        return ResponseEntity.ok(messageService.getAll(del_flag));
+    }
+
+    @PutMapping("/sms")
+    public ResponseEntity<?> editStatus(@RequestBody List<Integer> list){
+        return ResponseEntity.ok(messageService.edit(list));
+    }
     @GetMapping(value = "/{clientid}/{type}/products")
     public List<ProductsDto> getProducts(@PathVariable("type") Integer type, @PathVariable("clientid") Integer clientid) {
         List<ProductsDto> list = productsService.getProducts(type, clientid);
