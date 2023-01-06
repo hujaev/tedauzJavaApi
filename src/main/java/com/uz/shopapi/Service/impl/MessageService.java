@@ -5,6 +5,7 @@ import com.uz.shopapi.repository.MessageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -14,8 +15,10 @@ public class MessageService {
 
     public List<Message> getAll(int status) {
         List<Message> list = messageRepository.findAllByFlag(status);
+        LocalDateTime dateTime = LocalDateTime.now();
         for (Message message : list) {
             message.setFlag(2);
+            message.setSana(dateTime);
         }
         messageRepository.saveAll(list);
         return list;

@@ -9,7 +9,7 @@ import com.uz.shopapi.Model.entity.SlaveMain;
 import com.uz.shopapi.Service.*;
 
 import com.uz.shopapi.Service.impl.MessageService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -18,38 +18,39 @@ import java.util.List;
 
 @RestController
 @RequestMapping( value="/application/json")
+@RequiredArgsConstructor
 public class Controller {
-    @Autowired
+    private final
     ProductsService productsService;
 
-    @Autowired
+    private final
     AsosService asosService;
 
-    @Autowired
+    private final
     UserService userService;
 
-    @Autowired
+    private final
     AsosSlaveService asosSlaveService;
 
-    @Autowired
+    private final
     HaridorService haridorService;
 
-    @Autowired
+    private final
     DillerService dillerService;
 
-    @Autowired
+    private final
     KatService katService;
 
-    @Autowired
+    private final
     BrendService BrendService;
 
-    @Autowired
+    private final
     ZavodService ZavodService;
 
-    @Autowired
+    private final
     MainService mainService;
 
-    @Autowired
+    private final
     MessageService messageService;
 
     @GetMapping("/sms")
@@ -63,8 +64,7 @@ public class Controller {
     }
     @GetMapping(value = "/{clientid}/{type}/products")
     public List<ProductsDto> getProducts(@PathVariable("type") Integer type, @PathVariable("clientid") Integer clientid) {
-        List<ProductsDto> list = productsService.getProducts(type, clientid);
-        return list;
+        return productsService.getProducts(type, clientid);
     }
 
     @PutMapping(path = "/editProduct")

@@ -34,5 +34,5 @@ public class Message {
     @Column(nullable = false)
     private int flag = 0;
 
-    private LocalDateTime sana = LocalDateTime.now();
+    private LocalDateTime sana;
 }
