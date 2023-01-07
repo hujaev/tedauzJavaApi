@@ -2,16 +2,16 @@ package com.uz.shopapi.Service.impl;
 
 import com.uz.shopapi.Model.entity.Message;
 import com.uz.shopapi.repository.MessageRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class MessageService {
-    private final MessageRepository messageRepository;
+    @Autowired
+    MessageRepository messageRepository;
 
     public List<Message> getAll(int status) {
         List<Message> list = messageRepository.findAllByFlag(status);

@@ -9,7 +9,7 @@ import com.uz.shopapi.Model.entity.SlaveMain;
 import com.uz.shopapi.Service.*;
 
 import com.uz.shopapi.Service.impl.MessageService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -18,39 +18,38 @@ import java.util.List;
 
 @RestController
 @RequestMapping( value="/application/json")
-@RequiredArgsConstructor
 public class Controller {
-    private final
+    @Autowired
     ProductsService productsService;
 
-    private final
+    @Autowired
     AsosService asosService;
 
-    private final
+    @Autowired
     UserService userService;
 
-    private final
+    @Autowired
     AsosSlaveService asosSlaveService;
 
-    private final
+    @Autowired
     HaridorService haridorService;
 
-    private final
+    @Autowired
     DillerService dillerService;
 
-    private final
+    @Autowired
     KatService katService;
 
-    private final
+    @Autowired
     BrendService BrendService;
 
-    private final
+    @Autowired
     ZavodService ZavodService;
 
-    private final
+    @Autowired
     MainService mainService;
 
-    private final
+    @Autowired
     MessageService messageService;
 
     @GetMapping("/sms")
